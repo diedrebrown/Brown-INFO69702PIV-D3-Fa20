@@ -7,3 +7,4 @@ This folder contains my submission for the D3-SVG Lab. These files include:
 * The lab file (01_hw_SVG_scatter_brown.html)
 
 Here is a preview of the final product.
+![01_hw_SVG_scatter_brown-screenshot](https://user-images.githubusercontent.com/22225095/92615001-a40dd500-f28a-11ea-9fbc-09f7358c70c5.jpg)
