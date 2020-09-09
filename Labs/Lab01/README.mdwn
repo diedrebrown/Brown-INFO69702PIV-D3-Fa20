@@ -1,0 +1,9 @@
+# Lab 1 - D3-SVG
+
+This folder contains my submission for the D3-SVG Lab. These files include:
+
+* An image of the final product (01_hw_SVG_scatter_brown-screenshot.jpg)
+
+* The lab file (01_hw_SVG_scatter_brown.html)
+
+Here is a preview of the final product.
