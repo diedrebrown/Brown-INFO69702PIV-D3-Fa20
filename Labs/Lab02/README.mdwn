@@ -1,0 +1,11 @@
+# Lab 2 - D3-Scale
+
+This folder contains my submission for the D3-Scales Lab. These files include:
+
+* A CSV file of the dataset
+(adafruit09-03-20-1159.csv)
+The dataset contains abmient light value readings in my workspaced obtained over one minute using an Adafruit Feather Huzzah ESP8266.
+
+* An image of the final product (01_hw_SVG_scatter_brown-screenshot.jpg)
+
+* The lab file (02_hw_scale_scatter_brown.html)

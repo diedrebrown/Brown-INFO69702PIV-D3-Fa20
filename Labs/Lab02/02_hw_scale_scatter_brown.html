@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Lab2-Daylight Readings</title>
+        <script type="text/javascript" src= "https://d3js.org/d3.v5.js"></script>
+        <style type="text/css">
+            /*create styling for chart (header, lines, and text)*/
+            h1{
+                font-family:'Gill Sans', 'Gill Sans MT','Calibri', 'Trebuchet MS', sans-serif;
+                font-size: 24px;
+                color:darkslateblue;
+            }
+            .axis path,.axis line{
+                stroke: darkslateblue;
+            }
+            .axis text{
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 12px;
+                color: darkslateblue;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!--provide title-->
+        <h1>Daylight Readings from Adafruit Feather Huzzah ESP8266 at 11:59 on 3 September 2020</h1>
+        
+        <script type="text/javascript">
+            // declare chart dimensions
+            const svgW = 400;
+            const svgH = 400;
+
+            // declare/load lightvalue data at 11:59 on 3 Sept 2020 [time(s), ligthvalue]
+            const dataset = [ [10,266],[11,267],[12,267],[14,266],[16,266],[17,267],
+                            [20,266],[21,266],[22,267],[23,267],[24,267],[25,267],[26,266],
+                            [31,266],[32,266],[34,265],[36,265],[58,265],[59,265],[59,265]];
+
+            // create max xy based on data
+            const maxX = d3.max(dataset, d => d[0]);
+            const maxY = d3.max(dataset, d => d[1]);
+            const padding = 40;
+
+            // create responsive scales for x and y
+            const scaleX = d3.scaleLinear()
+                            .domain([0, maxX])
+                            .range([padding, svgW - padding]);
+            const scaleY = d3.scaleLinear()
+                            .domain([0, maxY])
+                            .range([svgH-padding, padding]);
+            
+            // anchor bottom and left axis
+            const bottomAxis = d3.axisBottom()
+                                .scale(scaleX)
+                                .ticks(20);
+            const leftAxis = d3.axisLeft()
+                                .scale(scaleY)
+                                .ticks(20);      
+            
+            // create svg
+            const svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", svgW)
+                        .attr("height", svgH);
+           
+            // visualize data with circle
+            svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr("cx", d => scaleX(d[0]))
+                .atrr("cy", d => scaleY(d[1]))
+                .attr("r", 6);
+
+            // implement bottom axis
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (svgH - padding) + ")")
+                .call(bottomAxis);
+            
+            // implement left axis
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + padding + ",0")
+                .call(leftAxis);
+        </script>
+    </body>
+</html>
