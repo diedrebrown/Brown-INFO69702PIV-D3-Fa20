@@ -25,3 +25,7 @@ Time was recorded in ranges of:
 I elected to look at the number of notifications, as they have an annoying habit of leading to more phone use.
 
 Though I was able to load my data and transform it so that the values were reading as dates and numbers, the final line chart would not show.
+
+![03_lab_brown-screenshot_01](https://user-images.githubusercontent.com/22225095/94025655-befe4000-fd86-11ea-8406-66475244601e.jpg)
+
+![03_lab_brown-screenshot_02](https://user-images.githubusercontent.com/22225095/94025739-d806f100-fd86-11ea-8b8e-09b4d1f2303b.jpg)
