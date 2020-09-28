@@ -31,3 +31,19 @@ Though I was able to load my data and transform it so that the values were readi
 ![03_lab_brown-screenshot_01](https://user-images.githubusercontent.com/22225095/94025655-befe4000-fd86-11ea-8406-66475244601e.jpg)
 
 ![03_lab_brown-screenshot_02](https://user-images.githubusercontent.com/22225095/94025739-d806f100-fd86-11ea-8b8e-09b4d1f2303b.jpg)
+
+Update 28 September 2020:
+
+After realizing that my code was not functioning properly due to the old function calls formating, I decided to redo this assignment. Through the process, I also discovered that some of the issues I had with the svg not appearing were also related to an npm http-server issue on my machine, which caused the DevTools "ERR_UNKNOWN_URL_SCHEME" to appear. This error was related to false formatting that my VS Code text editor kept adding.
+
+To gain practice with "creative svgs" I created re-did the assignment as an svg-data-display. I created a test svg image of a phone (svg-phone.html), then used this to create a data chart (03_02_lab_brown.html) seen below.
+
+![03_02_lab_brown_image](https://user-images.githubusercontent.com/22225095/94430034-42da7280-0161-11eb-8b84-03ed2faa15f2.jpg)
+
+In the folder 03_02_lab_brown, you will find:
+
+- The image of the final product (03_02_lab_brown_image.jpg)
+
+- The revised data set (phonepudata2.csv), which includes a column that sums the total minutes I spent on my phone after picking it up.
+
+- The lab file (03_02_lab_brown.html)

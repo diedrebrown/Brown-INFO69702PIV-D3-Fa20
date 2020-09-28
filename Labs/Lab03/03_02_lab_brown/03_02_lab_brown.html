@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lab3.2</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style type="text/css">
+      h1 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        padding: 10px;
+      }
+      p {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+      }
+      .title {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 14px;
+      }
+      .labels {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Number of Times I Picked Up My Phone 26-28 August 2020</h1>
+    <div>
+            <p>This visualization illustrates the number of times I picked up my phone due to notifications during 26-28
+                August 2020, which was recorded with pen and paper during the period. The dataset includes:
+            <ul>
+                <li>TIME - checking the time</li>
+                <li>NOTIFICATIONS - received a notification</li>
+                <li>ALARM - responding to a pre-set alarm/alert message</li>
+                <li>APPLICATIONS - using an application</li>
+            </ul>
+           <!-- Time was recorded in ranges of:
+            <ul>
+                <li>
+                    <= 1 minute</li>
+                <li>
+                    <= 5 minutes</li>
+                <li>
+                    <= 15 minutes</li>
+                <li>
+                    <= 30 minutes</li>
+                <li>
+                    <= 45 minutes</li>
+                <li>
+                    <= 1 hour</li>
+            </ul>-->
+            For the purposes of this visualization, I am going to examine the total number of times (phoneup) I picked up the phone (time2 + notifications + alarm + applications).
+            </p>
+            <p>Data Source: Personal notebook recordings 26-28 August 2020</p>
+        </div>
+    <svg>
+      <script type="text/javascript">
+        // load csv data 
+        const dataset = d3.csv("phonepudata2.csv").then(data=>{ // calc max and min from the total number of pickups (phoneup) 
+          const dataMax = d3.max(data, d=>+d.phoneup); 
+          const dataMin = d3.min(data, d=>+d.phoneup); 
+          const dataColor = d3.scaleLinear() 
+                              .domain([dataMin, dataMax]) .range(["white", "black"]); 
+        // create phone shape const 
+        const phone = ["M56,75 C55, 75 53, 75 52, 74 A 53, 53 0, 0 1, 38 68 A77, 77 0, 0 1, 19 53 C12, 46 7, 38 3, 28 A32, 32 0, 0 1, 1 17 A13, 13 0, 0 1, 4 7 C6, 5 8, 3 10, 1 C13, -2 17, -2 21, 1 C25, 4 28, 8 31, 11 A7, 7 0, 0 1, 31 21 C29, 23 27, 25 25, 27 C25, 27 25, 27 24, 28 A54, 54 0, 0 0, 45 49 L49, 45 A11, 11 0, 0 1, 53 42 A7, 7 0, 0 1, 60 43 Q66, 48 71, 54 A7, 7 0, 0 1, 71 64 C69, 67 68, 69 64, 72 A11, 11 0, 0 1, 58 75 A5, 5 0, 0 0, 57 75 Z"]; 
+        const row = 12; 
+        const size = 100;
+        const sizeY = 200; 
+        
+        // create svg 
+        const svgW = 1200;
+        const svgH = 1200;
+  
+        //const svgH = (Math.round(dataset.length/row)) * ((svgW/row));
+
+        const svg = d3.select("svg")
+                .attr("width", svgW)
+                .attr("height", svgH); 
+
+        //group 
+        const g = svg.selectAll("g") 
+                .data(data,d=>d) 
+                .enter() 
+                .append("g") 
+                .attr("transform", (d,i)=>{ 
+                  const x = (i %row)*size; 
+                  const y = (Math.floor(i/row)+0.7) * sizeY; 
+                  return 'translate('+ [x,y] + ')';}) 
+                .attr("fill", d=>dataColor(+d.phoneup)) 
+                .attr("stroke", "black") 
+                .attr("stroke-width", "0.5px"); 
+
+        g.append("path") 
+          .attr("d",phone); 
+
+        //labels 
+        g.append("text") 
+          .attr("x", size/2) //x coordinate
+          .attr("y", size + 10) //y coordinate 
+          .attr("text-anchor", "middle")//horizontal text align 
+          .attr("font-family", "monospace") 
+          .attr("dy","5px") //y offset 
+          .text(d=>d.date); 
+
+        g.append("text") 
+          .attr("x", size/2+30) //x coordinate 
+          .attr("y", size +50) //y coordinate
+          .attr("text-anchor", "middle") //horizontal text align
+          .attr("font-family", "monospace") 
+          .attr("dy", "5px") //y offset
+          .text(d=>+d.phoneup); //the text 
+        });
+      </script>
+    </svg>
+  </body>
+</html>
