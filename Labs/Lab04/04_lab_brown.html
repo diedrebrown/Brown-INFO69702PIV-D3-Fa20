@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab4</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style type="text/css">
+      h1 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        padding: 10px;
+      }
+      p {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        font-weight: normal;
+      }
+      div.gallery{
+        margin: 5px;
+        width: 200px;
+      }
+      div.gallery img{
+        width: 100%;
+        height: auto;
+      }
+      div.desc{
+        padding: 15px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!--Project Title and Description-->
+    <h1>Morning-Dog</h1>
+    <div>
+        <p>This visualization consists of a color palette that reflect a morning walk with dog, Ginger,  on Sunday, 27 September 2020. The colors were sampled with Adobe Capture, and the information was then turned into a csv of <em>2 rows</em> and <em>6 columns</em>.</p>
+        <p>Data Source: Adobe Capture readings of photos of Ginger taken on Sunday, 27 September 2020.</p>
+    </div>
+    <div>
+      <!--show the adobe capture images and the palette-->
+      <h3>The Adobe Capture "data"</h3>
+      <!--moring palette-->
+      <div class="gallery">
+        <a target="_blank" href="captureimgs/gingeram.png">
+          <img src="captureimgs/gingeram.png" alt="Captured image of Ginger in the morning" width="400" height="600">
+        </a>
+        <div class="desc">Captured image of Ginger in the morning</div>
+        <h4>Ginger's Morning Palette</h4>
+        <svg width = "500" height="500" id="svgam"></svg>
+      </div>
+    </div>
+  
+  
+      <script type="text/javascript">
+        //trying it as a write in:
+        //const dataset = [ {"color1":"#d09da0", "color2":"#d1a2af", "color3":"#a2bea0", "color4":"#8b876f", "color5":"#a49d84"}];           
+        
+        // load csv data 
+         const dataset = d3.csv("gingerdogday.csv").then(data=>{
+
+            // am palette
+            const amshapemarg = 40;
+            const amshapew = 500;
+            const amshapeh = 500;
+            //const colormax = d3.max(data, d=>+d.colnum);
+            //const colormin = d3.min(data, d=>+d.colnum);
+            // create a discrete am color map with scaleOrdinal
+            const amColor = d3.scaleOrdinal().domain(data).range(["#d09da0", "#d1a2af", "#a2bea0","#8b876f", "#a49d84"]);
+            // create am color swatches and append to svgam
+            const amsvg = d3.select("#svgam");
+            // make shapes and append to amsvg
+            amsvg.selectAll("rect")
+                  .data(dataset)
+                  .enter()
+                  .append("rect")
+                  .attr("x", (d,i) => i * (amshapew/dataset.length) + amshapemarg)
+                  .attr("y", 10)
+                  .attr("width", amshapew)
+                  .attr("height", amshapeh)
+                  .attr("fill", d => (amColor(d)));
+          });
+      </script>
+  </body>
+</html>

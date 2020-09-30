@@ -1,0 +1,10 @@
+# Lab 4
+
+This folder contains my submission for the D3-Lab4. These files include:
+
+- The lab file (04_lab_brown.html)
+
+- The dataset (gingerdogday.csv), which is a list of all the colors captured with Adobe Capture during a morning walk with my dog.
+
+- This image (04_lab_brown.jpg)
+  ![04_lab_brown](https://user-images.githubusercontent.com/22225095/94689894-6b976f00-02fd-11eb-882c-0bbcd25984bb.jpg)
