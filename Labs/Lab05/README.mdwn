@@ -1,0 +1,11 @@
+# Lab 5
+
+For the interactivity lab, I decided to revisit and re-interpret work from Lab 4 with the question, "What if colors could describe the hours of our day?"
+
+This folder contains my submission for the D3-Lab5. These files include:
+
+- The lab file (05_lab_brown.html)
+
+- The dataset (gingerdogday.csv), which is a list of all the colors captured with Adobe Capture during a morning walk with my dog.
+
+- This image (05_lab_brown_img.png)

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab5</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style type="text/css">
+      h1 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        color: #2a2b2b;
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        padding: 10px;
+      }
+      p {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        color:#2a2b2b;
+      }
+      /*responsive screen*/
+      @media (min-width: 1000px){
+        .calparent{
+          display: flex;
+        }
+      }
+      svg{
+        width: 1500px;
+        height: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+      /*set highlight hover color*/
+      .cirhigh:hover{
+        fill: #3EC0C4;
+      }
+      /*tooltip*/
+      #tooltip{
+        position: absolute;
+        width: 90px;
+        height:40px;
+        padding: 10px;
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        font-weight: 800px;
+        color:#2a2b2b;
+        background: #D9D5CF;
+        border: thin;
+        border-radius: 2px;
+        border-color: #2a2b2b;
+        border-width: 1px;
+      }
+      /*Dropdown Button*/
+      .dropbtn{
+        background-color: #d9d5cf;
+        color: #2a2b2b;
+        padding: 15px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10px;
+        font-weight: 800px;
+        border: thin;
+        border-radius: 2px;
+        border-width: 0.5px;
+        cursor: pointer;
+        vertical-align: middle;
+      }
+      /*Container <div> for position of dropdown content*/
+      .dropdown{
+        position: relative;
+        display: inline-block;
+        margin: auto;
+      }
+      /*Dropdown content*/
+      .dropdown-content{
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: #D9D5CF;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+        z-index: 1;
+      }
+      /* Content inside the dropdown */
+      .dropdown-content a {
+        color: #2a2b2b;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #8c8f8d}
+
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {
+        background-color: #d2d6d4;
+      }
+      option{
+        width: 25ex;
+        display: flex;
+        justify-content: center;
+        height: 20px;
+        align-items: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+  <section>
+      <h1>What if colors could describe the hours of one's day?</h1>
+      <p>This lab uses data from Lab 4, "Ginger's Day," to test interactivity with color.</p>
+      <p>Use your mouse to hover over each shape to learn more about that hour of Ginger's day. Or move the slider to see Ginger's color palette for the morning, afternoon, and evening.</p>
+      <p>Data source: <a href="https://github.com/diedrebrown/Brown-INFO69702PIV-D3-Fa20/blob/master/Labs/Lab05/gingerdogday5.csv">Ginger's Day</a></p>
+      <div id ="dropdown">
+        <button class="dropbtn" type="button">Time of Day</button>
+        <div class="dropdown-content">
+          <option>Morning</option>
+          <option>Afternoon</option>
+          <option>Evening</option>
+        </div> 
+      </div>        
+    </section>
+    <section class="calparent">
+      <svg id="colorgrid"></svg>
+    </section>
+    <script type="text/javascript">
+      // shape constants
+      const w = 800;
+      const h = 300;
+      const size = 10;
+      const sizeY = 70;
+      const row = 12;
+      // tooltip
+      const tooltip = d3.select("body")
+                        .append("div")
+                        .attr("id", "tooltip")
+                        .style("opacity", 0);
+      // import data
+      const dataset = d3.csv("gingerdogday5.csv").then(data =>{
+        // create svg element
+        const svgel = d3.select("#colorgrid");
+        // create a scale
+        const minhr = d3.min(data, d => d.hour);
+        const maxhr = d3.max(data, d => d.hour);
+        const dataScale = d3.scaleLinear()
+              .domain([minhr,maxhr])
+              .range([minhr,maxhr]);
+        // create a custom palette
+        const gingerColors = d3.scaleOrdinal()
+              .domain([minhr,maxhr])
+              .range(["#000000","#000000","#000000","#000000","#ffffff","#ffffff","#d09da0", "#d1a2af", "#a2bea0","#8b876f", "#a49d84", "#ffffff", "#bf7396", "#f2b988", "#005453","#d99771", "#a66844", "#ffffff", "#08818c", "#b89a96", "#d9a577","#8c5e35", "#ffffff", "#bf8563"]);
+        // append options to svg
+        svgel.selectAll("circle")
+              .data(data, d=>d.hour)
+              .enter()
+              .append("circle")
+              // circle arrangement
+              .attr("cx", (d,i) => i * dataScale(w/data.length)+24)
+              .attr("cy", h/2)
+              .attr("r", 20)
+              .attr("transform", (d,i)=>{
+                const x = (i%row)*size;
+                const y = (Math.floor(i/row))*sizeY;
+                return 'translate('+[x,y] +')';})
+              .attr("fill", d => gingerColors(d.hour))
+              .attr("stroke-width", 0.5)
+              .attr("stroke", "black")
+              // mouseover
+              .on("mouseover", (event,d)=>{
+                d3.select("#tooltip")
+                  .transition()
+                  .duration(500)
+                  .style("opacity", 1)
+                  .style("right", (event.pageX + 2) + "px")
+                  .style("top", (event.pageY + 2) + "px")
+                  .text("At " + d.hour + "h, Ginger was: " + d.activity + "Color: " + d.colorname);
+              })
+              .on("mouseout", (event, d)=>{
+                d3.select("#tooltip")
+                  .transition()
+                  .style("opacity", 0);
+              })
+              .on("mousemove", (event, d) =>{
+                d3.select("#tooltip")
+                  .style("right", (event.pageX + 2) + "px")
+                  .style("top", (event.pageY + 2) + "px")
+              });
+        // use the dropdown
+        d3.select("dropbtn")
+          .append("select")
+          .on("change", (event, d) =>{
+            const tod = event.currentTarget.value;
+            svgel.filter(d => d.tod == tod);
+                  d3.selectAll(remove)
+                    .transition()
+                    .remove();                        
+          });
+
+        // add slider change
+        });
+    </script>
+  </body>
+  </html>

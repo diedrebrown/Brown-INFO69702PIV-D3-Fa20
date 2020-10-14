@@ -1,0 +1,25 @@
+﻿tod,activity,colorname,hour
+morning,asleep,#000000,0
+morning,asleep,#000000,1
+morning,asleep,#000000,2
+morning,asleep,#000000,3
+morning,wakeup,#ffffff,4
+morning,breakfast,#ffffff,5
+morning,walk,#d09da0,6
+morning,walk,#d1a2af,7
+morning,walk,#a2bea0,8
+morning,walk,#8b876f,9
+morning,play,#a49d84,10
+morning,morning rest,#ffffff,11
+afternoon,walk,#bf7396,12
+afternoon,walk,#f2b988,13
+afternoon,snack,#005453,14
+afternoon,play,#d99771,15
+afternoon,dinner,#a66844,16
+afternoon,afternoon rest,#ffffff,17
+evening,walk,#08818c,18
+evening,snack,#b89a96,19
+evening,wait,#d9a577,20
+evening,wait,#8c5e35,21
+evening,evening nap,#ffffff,22
+evening,belly rubs,#bf8563,23

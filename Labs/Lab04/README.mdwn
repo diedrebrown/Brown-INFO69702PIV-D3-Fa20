@@ -1,5 +1,7 @@
 # Lab 4
 
+## VERSION 1
+
 This folder contains my submission for the D3-Lab4. These files include:
 
 - The lab file (04_lab_brown.html)
@@ -8,3 +10,15 @@ This folder contains my submission for the D3-Lab4. These files include:
 
 - This image (04_lab_brown.jpg)
   ![04_lab_brown](https://user-images.githubusercontent.com/22225095/94689894-6b976f00-02fd-11eb-882c-0bbcd25984bb.jpg)
+
+## UPDATE: VERSION 2
+
+Inspired by the interactivity lectures, I wanted to see if elements of interactivity could be incorporated into a static visualization. Therefore, this folder now contains above, as well as:
+
+- The new lab file (04_02_lab_brown.html)
+
+- The datasets (gingerdogday4-am.csv, gingerdogday4-aft.csv, and gingerdogday4-pm.csv), which is a full list of colors captures with Adobe Capture in one day with my dog.
+
+- A folder (captureimgs) with screenshots of all the Adobe Capture images.
+
+- The final image (04_02_lab_brown.jpg) ![04_02_lab_brown](https://user-images.githubusercontent.com/22225095/95666975-7b008e80-0b2d-11eb-914b-ffde921d2e9e.jpg)

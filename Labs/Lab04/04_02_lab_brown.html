@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab4</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <style type="text/css">
+      h1 {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        padding: 10px;
+      }
+      p {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        font-weight: normal;
+      }
+      @media (min-width: 800px){
+        .galparent{
+          display: flex;
+        }
+      }
+      div.gallery{
+        margin: 80px;
+        width: 200px;
+        float: left;
+      }
+      div.gallery img{
+        width: 100%;
+        height: auto;
+      }
+      div.desc{
+        padding: 15px;
+        text-align: center;
+      }
+      svg{
+        width: 300px;
+        height: 300px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!--Project Title and Description-->
+    <section>
+      <h1>Ginger's Day</h1>
+          <p>This visualization consists of color palette thats reflects a day with my dog, Ginger. The colors were sampled with Adobe Capture, and the information was then turned into a csv of <em>16 rows</em> and <em>5 columns</em>.</p>
+          <p>Data Source: Recorded time and Adobe Capture readings of photos of Ginger taken on Sunday, 27 September 2020.</p>
+    </section>
+
+    <!--show the adobe capture images and the palette-->
+    <section class="galparent">
+      <h3>The Adobe Capture "data"</h3>
+      <!--moring palette-->
+      <div class="gallery">
+        <h4>Ginger's Morning Palette</h4>
+        <a target="_blank" href="captureimgs/gingeram.png">
+          <img src="captureimgs/gingeram.png" alt="Captured image of Ginger in the morning" width="400" height="866"></a>
+        <div class="desc">Captured image of Ginger in the morning</div>
+        <svg id="svgam"></svg>
+      </div>
+      <!--afternoon palette-->
+      <div class="gallery">
+         <h4>Ginger's Afternoon Palette</h4>
+        <a target="_blank" href="captureimgs/gingeraft.png">
+          <img src="captureimgs/gingeraft.png" alt="Captured image of Ginger in the afternoon" width="400" height="866"></a>
+        <div class="desc">Captured image of Ginger in the afternoon</div>
+        <svg id="svgaft"></svg>
+      </div>
+      <!--evening palette-->
+      <div class="gallery">
+        <h4>Ginger's Evening Palette</h4>
+        <a target="_blank" href="captureimgs/gingerpm.png">
+          <img src="captureimgs/gingerpm.png" alt="Captured image of Ginger in the evening" width="400" height="866"></a>
+        <div class="desc">Captured image of Ginger in the evening</div>
+        <svg id="svgpm"></svg>
+      </div>
+    </section>
+  
+  
+      <script type="text/javascript">
+      // try with coloring one palatte
+/*      const w = 200;
+      const h = 200;
+      // create svg element
+      const svgam = d3.select("#svgam");
+      // make some data
+      const amdata = ["A", "B", "C", "D", "E"];
+      // create color palette
+      const amColor = d3.scaleOrdinal()
+          .domain(amdata)
+          .range(["#d09da0", "#d1a2af", "#a2bea0","#8b876f", "#a49d84"]);
+      // create circles
+      svgam.selectAll("circle")
+            .data(amdata)
+            .enter()
+            .append("circle")
+            .attr("cx", (d,i) => i * (w/amdata.length)+20)
+            .attr("cy", h/3)
+            .attr("r", 10)
+            .attr("fill", d => amColor(d))
+            .attr("fill-opacity", 0.5)
+            .attr("stroke-width", 2)
+            .attr("stroke", d => amColor(d));*/
+
+      /* since there are times of day there will be three of everything!
+      there's probably a way to iterate through this, but for now let's just use 3 sets so i can easily figure out any errors. */
+      const w = 200;
+      const h = 200;
+/* MORNING DATA */
+      // import morning csv data
+      const morningdata = d3.csv("ginerdogday4-am.csv").then(data => {
+        // create svg element for the morning
+        const svgam = d3.select("#svgam");   
+        // create a custom am color palette
+        const gingerAMcolors = d3.scaleOrdinal()
+              .domain(["a", "b", "c", "d", "e"])
+              .range(["#d09da0", "#d1a2af", "#a2bea0","#8b876f", "#a49d84"]);
+        /* create morning circles*/
+        svgam.selectAll("circle")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("circle")
+              .attr("cx", (d,i) => i * (w/data.length)+20)
+              .attr("cy", h/3)
+              .attr("r", 10)
+              .attr("fill", d => gingerAMcolors(d.photoperiod))
+              .attr("fill-opacity", 0.90)
+              .attr("stroke-width", 2)
+              .attr("stroke", d => gingerAMcolors(d.photoperiod));
+        svgam.selectAll("text")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("text")
+              .text(d=>d.colorname)
+              .attr("x", (d,i) => i * (w/data.length)+20)
+              .attr("y", h/2)
+              .attr("font-size","9px")
+              .attr("fill", d => gingerAMcolors(d.photoperiod));
+      });
+
+/* AFTERNOON DATA */
+      // import afternoon csv data
+      const afternoondata = d3.csv("ginerdogday4-aft.csv").then(data => {
+        // create svg element for the afternoon
+        const svgaft = d3.select("#svgaft");  
+        // create a custom am color palette
+        const gingerAFTcolors = d3.scaleOrdinal()
+              .domain(["f", "g", "h", "i", "j"])
+              .range(["#bf7396", "#f2b988", "#005453","#d99771", "#a66844"]);
+        // create circles
+        /* afternoon */
+        svgaft.selectAll("circle")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("circle")
+              .attr("cx", (d,i) => i * (w/data.length)+20)
+              .attr("cy", h/3)
+              .attr("r", 10)
+              .attr("fill", d => gingerAFTcolors(d.photoperiod))
+              .attr("fill-opacity", 0.90)
+              .attr("stroke-width", 2)
+              .attr("stroke", d => gingerAFTcolors(d.photoperiod));
+        svgaft.selectAll("text")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("text")
+              .text(d=>d.colorname)
+              .attr("x", (d,i) => i * (w/data.length)+20)
+              .attr("y", h/2)
+              .attr("font-size","9px")
+              .attr("fill", d => gingerAFTcolors(d.photoperiod));
+      });
+
+/* EVENING DATA */
+      // import evening csv data
+      const eveningdata = d3.csv("ginerdogday4-pm.csv").then(data => {
+        // create svg element for the evening
+        const svgpm = d3.select("#svgpm");  
+        // create a custom am color palette
+        const gingerPMcolors = d3.scaleOrdinal()
+              .domain(["k", "l", "m", "n", "o"])
+              .range(["#08818c", "#b89a96", "#d9a577","#8c5e35", "#bf8563"]);
+        // create circles
+        /* afternoon */
+        svgpm.selectAll("circle")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("circle")
+              .attr("cx", (d,i) => i * (w/data.length)+20)
+              .attr("cy", h/3)
+              .attr("r", 10)
+              .attr("fill", d => gingerPMcolors(d.photoperiod))
+              .attr("fill-opacity", 0.90)
+              .attr("stroke-width", 2)
+              .attr("stroke", d => gingerPMcolors(d.photoperiod));
+        svgpm.selectAll("text")
+              .data(data, d=>d.photoperiod)
+              .enter()
+              .append("text")
+              .text(d=>d.colorname)
+              .attr("x", (d,i) => i * (w/data.length)+20)
+              .attr("y", h/2)
+              .attr("font-size","9px")
+              .attr("fill", d => gingerPMcolors(d.photoperiod));
+      });
+
+      </script>
+  </body>
+</html>
