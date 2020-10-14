@@ -9,3 +9,4 @@ This folder contains my submission for the D3-Lab5. These files include:
 - The dataset (gingerdogday.csv), which is a list of all the colors captured with Adobe Capture during a morning walk with my dog.
 
 - This image (05_lab_brown_img.png)
+  <img width="1520" alt="05_lab_brown_img" src="https://user-images.githubusercontent.com/22225095/96009704-fb194380-0e0e-11eb-895c-00e4ba306c0f.png">
