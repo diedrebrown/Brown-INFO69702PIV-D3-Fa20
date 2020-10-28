@@ -1,0 +1,37 @@
+# Lab 7 - Networks and Hierarchies
+
+Because of they represent the interconnectivity of entities, network and hierarchy visualizations are often used to represent biological data. Network visualizations are useful for estabilishing similarities between organisims and structures, whereas, hierarchical diagrams such as tree diagrams are essential for taxonomic classifications. This lab visualizes a butterfly similarity network with two datasets. The data was sourced from the **S**tanford **N**etwork **A**nalysis **P**latform (**SNAP**), a general purpose network analysis and graph mining library (SNAP: Stanford Network Analysis Project, n.d.). The information contained in the dataset was extracted from the Leeds butterfly fine-grained species image dataset (BioSNAP: Network Datasets: Butterfly Similarity Network, n.d.). While there were only 10 different species of butterflies identified, the dataset contains 832 individual nodes and 86,528 edges. Force drag is used move a few of the nodes.
+
+These files include:
+
+- The lab file (07_lab_brown.html)
+
+- The datasets (SSButterflylabels.csv and SSButterflyweights.csv)
+
+- An images folder, which contains the images below, as well as short video of one of the dots moving. You can also access the video [here](https://drive.google.com/file/d/1F9LUcnwFjXPoKe9qNY7aOaPsP_GML9mT/view?usp=sharing).
+
+When I first loaded the data, I realized that the svg size was too small for the amount of data. It was too crowded and difficult to discern anything. Wang et al.'s article "Network enhancement as a general method to denoise weighted biological networks", utilizes this dataset to address the same point. Though networks are useful for visualizing high-level affinities, methods of enhancement are needed to denoise the clustering (Wang et al., 6). While I did not use the machine learning methods applied by others, by thining the weight of the internodes, the nodes were able to show some form of network connection. However, I did notice that loading was extremely slow.
+
+## Initial Loading
+
+<img width="1635" alt="network1" src="https://user-images.githubusercontent.com/22225095/97397638-17fa5000-18c0-11eb-86b8-8c89d9489d80.png">
+
+## Revised Loading
+
+![network1-1](https://user-images.githubusercontent.com/22225095/97397756-63acf980-18c0-11eb-9b42-daa989e3813e.png)
+
+## Dragging Blue Dot
+
+![network5-blue](https://user-images.githubusercontent.com/22225095/97397943-bd152880-18c0-11eb-88c4-6b90d654726b.png)
+
+## Return Transition
+
+![network4](https://user-images.githubusercontent.com/22225095/97397837-863f1280-18c0-11eb-893a-a421bcad7fe4.png)
+
+#### References
+
+BioSNAP: Network datasets: Butterfly similarity network. (n.d.). Retrieved October 23, 2020, from https://snap.stanford.edu/biodata/datasets/10029/10029-SS-Butterfly.html
+
+SNAP: Stanford Network Analysis Project. (n.d.). Retrieved October 23, 2020, from [https://snap.stanford.edu/index.html](https://snap.stanford.edu/index.html)
+
+Wang, B., Pourshafeie, A., Zitnik, M., Zhu, J., Bustamante, C. D., Batzoglou, S., & Leskovec, J. (2018). Network enhancement as a general method to denoise weighted biological networks. Nature Communications, 9(1), 3108. https://doi.org/10.1038/s41467-018-05469-x

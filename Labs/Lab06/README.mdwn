@@ -1,0 +1,12 @@
+# Lab 6
+
+Works by Women Artists and Designers Using Glass Acquired by the Architecture & Design Collection at the Museum of Modern Art MoMA
+The orginal 29 column, 138,179 row csv file was modified in OpenRefine. Here, only the 75 works by women artists, whether in a group or solo, whose works contain glass or glass elements in the Architecture & Design collection where selected.
+
+These files include:
+
+- The lab file (06_lab_brown.html)
+
+- The datasets (momaartworks-wglass.csv and momaartworks-wglass-pie.csv)
+
+- This image of the lab as it is now.![image](https://user-images.githubusercontent.com/22225095/96741748-2ad8c600-1390-11eb-8416-3a8ca4dfbb6a.png)

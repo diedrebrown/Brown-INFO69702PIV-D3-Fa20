@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Lab7-Network</title>
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style type="text/css">
+            .links{
+                stroke: '#2a2b2b';
+                stroke-width: .25px;
+                fill: none;
+            }
+            .nodes{
+                fill: red;
+                stroke: black;
+                stroke-width: .25px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div>
+            <svg id="map" width="2000" height="2000"></svg>
+        </div>
+        <script type="text/javascript">
+        //declare const
+        const svg = d3.select("#map");
+        const w = 2000;
+        const h = 2000;
+        const colorSel = d3.scaleOrdinal(d3.schemeTableau10);
+        //import data 
+        Promise.all([
+            d3.csv("SSButterflylabels.csv"),
+            d3.csv("SSButterflyweights.csv"),
+        ]).then(function(files){
+            //files[0] => SSButterflylabels.csv
+            //files[1] => SSButterflyweights.csv
+            const data = {
+                "nodes": files[0].map(d => { return {"id": +d.NodeID, "name": d.Species}}),
+                "links": files[1].map(d => { return {"source": +d.NodeID1, "target": +d.NodeID2, "weight": +d.isweight}})
+            };
+            console.log(data);
+            //force simulation
+            const simulation = d3.forceSimulation(data.nodes)
+                                .force("charge", d3.forceManyBody().strength(-100))
+                                .force("link", d3.forceLink(data.links).distance(50))
+                                .force("center", d3.forceCenter().x(w/2).y(h/2));
+            //link lines(internodes)
+            const links = svg.selectAll("line")
+                            .data(data.links)
+                            .join("line")
+                            .append("line")
+                            .style("stroke","black")
+                            .style("stroke-width", .4);
+            //nodes(circles)
+            const nodes = svg.selectAll("circle")
+                            .data(data.nodes)
+                            .enter()
+                            .append("circle")
+                            .attr("r", 4)
+                            .style("fill", (d,i)=>colorSel(i))
+                            .call(d3.drag()
+                                .on("start", dragstarted)
+                                .on("drag", dragged)
+                                .on("end", dragended));
+            //force ticks
+            simulation.on("tick", (event,d)=>{
+               links.attr("x1", d=>d.source.x)
+                    .attr("y1", d=>d.source.y)
+                    .attr("x2", d=>d.target.x)
+                    .attr("y2", d=>d.target.y);
+                
+                nodes.attr("cx", d=>d.x)
+                     .attr("cy", d=>d.y);
+            });
+            //drag events
+            function dragstarted(event) {
+                if(!event.active) simulation.alphaTarget(0.4).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            }
+            function dragged(event) {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            }
+            function dragended(event){
+                if(!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            }
+        });
+        </script>
+    </body>
+</html>
