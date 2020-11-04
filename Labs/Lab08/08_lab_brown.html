@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Lab8 - Major Subdivisions of the Animal Kingdom</title>
+		<script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+		<style type="text/css">
+			/*page headers, body, paragraphs*/
+			h1{
+				font-family: "Courier New", Courier, monospace;
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				color: #2a2b2b;
+			}
+			h6{
+				font-family: "Courier New", Courier, monospace;
+				font-size: 10px;
+				font-weight: bold;
+				color: #2a2b2b;
+			}
+			body{
+				font-family: "Courier New", Courier, monospace;
+				font-size: 14px;
+				padding: 10px;
+			}
+			p {
+				font-family: "Courier New", Courier, monospace;
+				font-size: 14px;
+				font-weight: normal;
+				color:#2a2b2b;
+			}
+			/*responsive screen*/
+			@media(min-width: 1000px){
+				.calparent{
+					display:flex;
+				}
+			}
+			/*set highlight hover color*/
+			.cirhigh:hover{
+				fill:coral;
+			}
+			/*tooltip*/
+			#tooltip{
+				position: absolute;
+				width: 90px;
+				height:40px;
+				padding: 10px;
+				text-align: center;
+				font-family: "Courier New", Courier, monospace;
+				font-size: 10px;
+				font-weight: 800px;
+				color:#2a2b2b;
+				background: #D9D5CF;
+				border: thin;
+				border-radius: 2px;
+				border-color: #2a2b2b;
+				border-width: 1px;
+			}
+			/* create style for links*/
+			.links{
+				stroke: black;
+				stroke-width: .5px;
+			}
+			/*create style for nodes*/
+			.nodes{
+				fill: rgb(50, 105, 24);
+				stroke: black;
+				stroke-width: .5px;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h1>Major Subdivisions of the Animal Kingdom</h1>
+			<p>Below is a Linnean classification map of the animal kingdom. This map uses the traditional groupings based on embryological (where the gut forms in an embryonic gastrocoel) and anatomical characters (such as being radial or bilaterally symmetric) of different animal phyla. </p>
+			<p>Recent molecular phylogentic studies challenge the placement of the Infra Kingdom Mesozoa, and the classification of Bilateria (Hickman et al. 85). These studies suggest that Mesozoa (Phylum: Porifera a.k.a. Sea Sponges...Spongebob!) might be derived from Protosomia. And that the protosomoes should be divided into two major monophyletic groups called Lophotrochozoa and Ecdysoza.</p>
+			<h6>Data Source: Hickman, C.P., Roberts, L.S., Keen, S.L., Larson, A., Eisenhour, D.J. (2009), <i>Animal Diversity</i>(5th ed.). McGraw Hill.</h6>
+		</section>
+		<section class="calparent">
+			<svg id="map" width = "1000" height="1000"></svg>
+		</section>
+		<script type="text/javascript">
+			//create svg constants
+			const w = 1000;
+			const h = 1000;
+			//create a tooltip
+			const tooltip = d3.select("body")
+							.append("div")
+							.attr("id","tooltip")
+							.style("opacity", 0);
+			//import hierarchical data with d3.json()
+			const data = d3.json("aktrad.json").then(data =>{
+				const svg = d3.select("#map")
+							.append("g")
+							.attr("transform", "translate(20,20)")
+							// mouseover - tooltip
+							.on("mouseover", (event, d) => {
+								d3.select("#tooltip")
+									.transition()
+									.duration(500)
+									.style("opacity", 1)
+									.style("right", (event.pageX + 2) + "px")
+									.style("top", (event.pageY + 2) + "px")
+									.text("This is: " + data.name);
+							})
+							.on("mouseout", (event, d) => {
+								d3.select("#tooltip")
+									.transition()
+									.style("opacity", 0);
+							})
+							.on("mousemove", (event, d) => {
+								d3.select("#tooltip")
+									.style("right", (event.pageX + 2) + "px")
+									.style("top", (event.pageY + 2) + "px")
+							});
+				//treemap layout
+				const tree = d3.tree()
+								.size([w-50, h-50]);
+				//dataset to treemap
+				const root = d3.hierarchy(data);
+				//write the x/y values for each node
+				tree(root);
+				//look at the data changes
+				console.log(data);
+				console.log(root);
+				//linkages
+				const links = svg.selectAll("path")
+								.data(root.links())
+								.enter()
+								.append("class","links")
+								.attr("d", d3.linkHorizontal() //generates links
+										.x(d => d.y)
+										.y(d => d.x));
+				//nodes
+				const nodes = svg.selectAll("circle")
+								.data(root.descendants())
+								.enter()
+								.append("circle")
+								.attr("class","nodes")
+								.attr("cx", d => d.y)
+								.attr("cy", d => d.x)
+								.attr("r", 10);
+
+			});
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,75 @@
+{
+    "name": "Animal Kingdom", 
+    "children": [
+      {"name": "SubKingdom-Protozoa", 
+       "children": [
+        {"name": "Phylum-Protozoa"}
+       ]},
+      {"name": "SubKingdom-Eumetazoa", 
+       "children": [
+        {"name": "InfraKingdom-Mesozoa",
+        "children":[
+        	{"name": "Phylum-Porifera"}
+        ]},
+        {"name": "InfraKingdom-Parazoa", 
+         "children": [
+          {"name": "Phylum-Placozoa"}
+         ]},
+         {"name": "InfraKingdom-Eumetazoa",
+          "children":[
+          	{"name": "Grade-Radiata",
+          	"children":[
+          		{"name": "Phylum-Cnidaria"},
+          		{"name": "Phylum-Ctenophora"}
+          	]},
+            {"name": "Grade-Bilateria",
+             "children":[
+             	{"name": "Division-Protostomia",
+             	 "children":[
+             	 	{"name": "Subdivision-Acoelomates",
+             	 	"children":[
+             	 		{"name": "Phylum-Platyhelminthes"},
+             	 		{"name": "Phylum-Gnathostomuluida"},
+             	 		{"name": "Phylum-Nemertea"}
+             	 	]},
+             	 	{"name": "Subdivision-Pseudocoelomates",
+             	 	"children":[
+             	 		{"name": "Phylum-Rotifera"},
+             	 		{"name": "Phylum-Gastrotricha"},
+             	 		{"name": "Phylum-Kinorhyncha"},
+             	 		{"name": "Phylum-Nematoda"},
+             	 		{"name": "Phylum-Nematomorpha"},
+             	 		{"name": "Phylum-Acanthocephala"},
+             	 		{"name": "Phylum-Entoprocta"},
+             	 		{"name": "Phylum-Priapulida"},
+             	 		{"name": "Phylum-Loricifera"}
+             	 	]},
+             	 	{"name": "Subdivision-Coelomates",
+             	 	"children":[
+             	 		{"name": "Phylum-Mollusca"},
+             	 		{"name": "Phylum-Annelida"},
+             	 		{"name": "Phylum-Arthropoda"},
+             	 		{"name": "Phylum-Echiura"},
+             	 		{"name": "Phylum-Spinucula"},
+             	 		{"name": "Phylum-Tardigrada"}
+             	 	]}
+             	 ]},
+             	{"name": "Division-Deuterostomia",
+             	"children":[
+             		{"name": "Phylum-Phoronida"},
+             		{"name": "Phylum-Ectoprocta"},
+             		{"name": "Phylum-Chaetognatha"},
+             		{"name": "Phylum-Brachiopoda"},
+             		{"name": "Subdivision-Enterocoelomata",
+             		"children":[
+             			{"name": "Echinodermata"},
+             			{"name": "Hemichordata"},
+             			{"name": "Chordata"}
+             		]}
+             	]}
+             ]}
+         ]}
+       ]
+      }
+    ]
+}

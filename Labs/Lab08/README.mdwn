@@ -1,0 +1,23 @@
+# Lab 8 - Networks and Hierarchies Interactive
+
+Following Lab 7, this lab visualizes the hierarchical structure of the animal kingdom. The dataset was written by me in json and summarizes the text found in pp. 84-85 of Hickman et al.'s book <i>Animal Diversity</i>. A tooltip, though intended to be used to display the name of each node, displays the name of the kingdom. On previous attempts to display the name of the child, the position of the element (e.g. Object, Object, Object) displayed instead. Simmilarly, while the links initially displayed during testing, when I went to take the browser screenshot they disappeared. These same happened to the links in the code provided during Week 9's lab, so I am not sure why the browser chose not to display them.
+
+The files in this repository include:
+
+- The lab file (08_lab_brown.html)
+
+- The data folder with the dataset in json and csv formats (aktrad.json and animalkingdom.csv)
+
+- An images folder, which contains the two images below.
+
+## Treemap
+
+<img width="1659" alt="08_lab_brown1" src="https://user-images.githubusercontent.com/22225095/98104019-e22b0d80-1e63-11eb-84c4-b5641c4c1196.png">
+
+## Treemap with tooltip
+
+<img width="1659" alt="08_lab_brown1-tooltip" src="https://user-images.githubusercontent.com/22225095/98104020-e22b0d80-1e63-11eb-85e8-93e8e2e03fae.png">
+
+#### References
+
+Hickman, C.P., Roberts, L.S., Keen, S.L., Larson, A., Eisenhour, D.J. (2009), <i>Animal Diversity</i>(5th ed.). McGraw Hill.</h6>
